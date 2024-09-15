@@ -1,0 +1,60 @@
+{
+  "name": "directus-desktop-app",
+  "version": "1.0.0",
+  "description": "Directus Desktop App",
+  "main": "./src/main.js",
+  "productName": "Directus Desktop App",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "builder": "node ./src/build.js"
+  },
+  "keywords": [],
+  "author": "rootdm",
+  "license": "MIT",
+  "build": {
+    "appId": "com.directus.app",
+    "asar": true,
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "./images/icon.ico"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "root-dm",
+        "repo": "directus-desktop-app"
+      }
+    ],
+    "nsis": {
+      "oneClick": true,
+      "installerIcon": "./images/icon.ico",
+      "uninstallerIcon": "./images/icon.ico",
+      "uninstallDisplayName": "Uninstall Directus Desktop",
+      "license": "license.md",
+      "allowToChangeInstallationDirectory": false
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json",
+      ".env",
+      "license.md",
+      "images/**/*",
+      "src/**/*"
+    ]
+  },
+  "dependencies": {
+    "@electron/fuses": "^1.8.0",
+    "dotenv": "^16.4.5",
+    "electron-packager": "^17.1.2",
+    "electron-store": "^10.0.0",
+    "electron-updater": "^6.3.4"
+  },
+  "devDependencies": {
+    "electron": "^32.1.0",
+    "electron-builder": "^25.0.5"
+  }
+}
