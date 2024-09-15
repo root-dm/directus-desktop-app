@@ -21,13 +21,6 @@
       ],
       "icon": "./images/icon.ico"
     },
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "root-dm",
-        "repo": "directus-desktop-app"
-      }
-    ],
     "nsis": {
       "oneClick": true,
       "installerIcon": "./images/icon.ico",
@@ -50,8 +43,7 @@
     "@electron/fuses": "^1.8.0",
     "dotenv": "^16.4.5",
     "electron-packager": "^17.1.2",
-    "electron-store": "^10.0.0",
-    "electron-updater": "^6.3.4"
+    "electron-store": "^10.0.0"
   },
   "devDependencies": {
     "electron": "^32.1.0",
