@@ -3,7 +3,6 @@ const { screen, BrowserWindow } = require('electron');
 const { getAppName, getAppUrl, getIconPath, logError } = require('./helper');
 
 async function createWindow() {
-  logError('re');
   const Store = (await import('electron-store')).default;
   const store = new Store();
 
