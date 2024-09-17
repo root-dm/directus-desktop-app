@@ -37,8 +37,7 @@ function getAppUrl() {
 }
 
 function getIconPath() {
-  logError(path.join(__dirname, 'images', 'icon.ico'));
-  return path.join(__dirname, 'images', 'icon.ico');
+  return path.join(__dirname, '..', 'images', 'icon.ico');
 }
 
 function getLogFilePath() {
@@ -65,13 +64,11 @@ function logError(error) {
 }
 
 function sendNotification(isSuccess, title, message, action) {
-  const iconPath = path.join(__dirname, '..', 'images', 'icon.ico');
-
   const notification = {
     title: title,
     body: message,
     subtitle: isSuccess ? 'Success' : 'Error',
-    icon: iconPath,
+    icon: getIconPath(),
   };
   const notificationObject = new Notification(notification);
 

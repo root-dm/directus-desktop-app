@@ -1,5 +1,5 @@
 const { screen, BrowserWindow, Menu } = require('electron');
-const { getAppName, getAppUrl, getIconPath, logError, getAppVersion } = require('./helper');
+const { getAppName, getAppUrl, getIconPath, getAppVersion } = require('./helper');
 
 let win = null;
 
