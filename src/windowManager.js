@@ -1,6 +1,13 @@
-// windowManager.js
 const { screen, BrowserWindow, Menu } = require('electron');
 const { getAppName, getAppUrl, getIconPath, logError, getAppVersion } = require('./helper');
+
+let win = null;
+
+function showWindow() {
+  if (!win) {
+    createWindow();
+  }
+}
 
 async function createWindow() {
   const Store = (await import('electron-store')).default;
@@ -12,7 +19,7 @@ async function createWindow() {
   const defaultHeight = Math.floor(height * 0.8);
   const windowBounds = store.get('windowBounds') || { width: defaultWidth, height: defaultHeight };
 
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: windowBounds.width,
     height: windowBounds.height,
     x: windowBounds.x || undefined,
@@ -41,6 +48,16 @@ async function createWindow() {
   win.on('move', () => {
     store.set('windowBounds', win.getBounds());
   });
+
+  win.on('close', (event) => {
+    win = null;
+  });
+
+  win.on('closed', () => {
+    win = null;
+  });
+
+  createMenu();
 }
 
 function createMenu() {
@@ -78,4 +95,4 @@ function createMenu() {
   Menu.setApplicationMenu(menu);
 }
 
-module.exports = { createWindow, createMenu };
+module.exports = { createWindow, showWindow };

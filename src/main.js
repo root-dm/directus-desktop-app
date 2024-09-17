@@ -1,19 +1,25 @@
 const { app } = require('electron');
-const { createWindow, createMenu } = require('./windowManager');
+const { createWindow } = require('./windowManager');
+const { createTray } = require('./trayManager');
 const { logError, getAppName } = require('./helper');
 
+let tray = null;
+
 app.whenReady().then(async () => {
+
+  tray = createTray();
+
   createWindow().catch((error) => {
     logError(error);
   });
-
-  createMenu();
 });
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+app.on('window-all-closed', (event) => {
+  event.preventDefault();
+});
+
+app.on('before-quit', () => {
+  if (tray) tray.destroy();
 });
 
 app.on('activate', () => {
