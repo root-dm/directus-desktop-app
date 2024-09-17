@@ -37,7 +37,8 @@ function getAppUrl() {
 }
 
 function getIconPath() {
-  return path.join(__dirname, '..', 'images', 'icon.ico');
+  const name = process.env.APP_ICON_NAME || 'icon.ico';
+  return path.join(__dirname, '..', 'images', name);
 }
 
 function getLogFilePath() {
