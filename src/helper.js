@@ -2,12 +2,6 @@ const path = require('path');
 const { app, session, Notification } = require('electron');
 const fs = require('fs');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
-const { mimeTypes } = require('./types');
-
-function getMimeType(filePath) {
-  const ext = path.extname(filePath).toLowerCase();
-  return mimeTypes[ext] || 'application/octet-stream';
-}
 
 async function getAccessToken() {
   const { default: Store } = await import('electron-store');
@@ -92,6 +86,5 @@ module.exports = {
   logError,
   getAppVersion,
   getAccessToken,
-  getMimeType,
   sendNotification
 };

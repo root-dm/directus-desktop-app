@@ -1,7 +1,6 @@
 // windowManager.js
 const { screen, BrowserWindow, Menu } = require('electron');
 const { getAppName, getAppUrl, getIconPath, logError, getAppVersion } = require('./helper');
-const { openFileUploader } = require('./fileUploader');
 
 async function createWindow() {
   const Store = (await import('electron-store')).default;
@@ -47,17 +46,7 @@ async function createWindow() {
 function createMenu() {
   const template = [
     {
-      label: 'File',
-      submenu: [
-        {
-          label: 'Upload File',
-          click: () => {
-            openFileUploader();
-          }
-        },
-        { type: 'separator' },
-        { role: 'quit' }
-      ]
+      role: 'fileMenu'
     },
     {
       role: 'editMenu'

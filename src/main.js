@@ -1,6 +1,6 @@
 const { app } = require('electron');
 const { createWindow, createMenu } = require('./windowManager');
-const { logError, getAccessToken, getAppName } = require('./helper');
+const { logError, getAppName } = require('./helper');
 
 app.whenReady().then(async () => {
   createWindow().catch((error) => {
