@@ -1,11 +1,13 @@
 const { app } = require('electron');
-const { createWindow } = require('./windowManager');
-const { logError } = require('./helper');
+const { createWindow, createMenu } = require('./windowManager');
+const { logError, getAccessToken, getAppName } = require('./helper');
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   createWindow().catch((error) => {
     logError(error);
   });
+
+  createMenu();
 });
 
 app.on('window-all-closed', () => {
@@ -24,3 +26,7 @@ process.on('uncaughtException', (error) => {
   logError(error);
   app.quit();
 });
+
+if (process.platform === 'win32') {
+  app.setAppUserModelId(getAppName());
+}

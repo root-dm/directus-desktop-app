@@ -1,9 +1,9 @@
 // windowManager.js
-const { screen, BrowserWindow } = require('electron');
-const { getAppName, getAppUrl, getIconPath, logError } = require('./helper');
+const { screen, BrowserWindow, Menu } = require('electron');
+const { getAppName, getAppUrl, getIconPath, logError, getAppVersion } = require('./helper');
+const { openFileUploader } = require('./fileUploader');
 
 async function createWindow() {
-  logError('re');
   const Store = (await import('electron-store')).default;
   const store = new Store();
 
@@ -44,4 +44,49 @@ async function createWindow() {
   });
 }
 
-module.exports = { createWindow };
+function createMenu() {
+  const template = [
+    {
+      label: 'File',
+      submenu: [
+        {
+          label: 'Upload File',
+          click: () => {
+            openFileUploader();
+          }
+        },
+        { type: 'separator' },
+        { role: 'quit' }
+      ]
+    },
+    {
+      role: 'editMenu'
+    },
+    {
+      role: 'viewMenu'
+    },
+    {
+      role: 'windowMenu'
+    },
+    {
+      label: 'Help',
+      submenu: [
+        {
+          label: `Version ${getAppVersion()}`,
+          enabled: false
+        },
+        {
+          label: 'Visit online',
+          click: () => {
+            require('electron').shell.openExternal(getAppUrl());
+          }
+        }
+      ]
+    }
+  ];
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+}
+
+module.exports = { createWindow, createMenu };
