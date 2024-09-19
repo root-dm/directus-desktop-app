@@ -1,5 +1,5 @@
 const path = require('path');
-const { app, session, Notification } = require('electron');
+const { app, session, Notification, nativeImage } = require('electron');
 const fs = require('fs');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
@@ -39,6 +39,11 @@ function getAppUrl() {
 function getIconPath() {
   const name = process.env.APP_ICON_NAME || 'icon.ico';
   return path.join(__dirname, '..', 'images', name);
+}
+
+function getIconNativeImage() {
+  const icon = nativeImage.createFromPath(getIconPath());
+  return icon;
 }
 
 function getLogFilePath() {
@@ -84,5 +89,6 @@ module.exports = {
   logError,
   getAppVersion,
   getAccessToken,
-  sendNotification
+  sendNotification,
+  getIconNativeImage
 };

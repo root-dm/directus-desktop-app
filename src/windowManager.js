@@ -1,5 +1,5 @@
 const { screen, BrowserWindow, Menu } = require('electron');
-const { getAppName, getAppUrl, getIconPath, getAppVersion } = require('./helper');
+const { getAppName, getAppUrl, getIconNativeImage, getAppVersion } = require('./helper');
 
 let win = null;
 
@@ -25,7 +25,7 @@ async function createWindow() {
     x: windowBounds.x || undefined,
     y: windowBounds.y || undefined,
     title: getAppName(),
-    icon: getIconPath(),
+    icon: getIconNativeImage(),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
